@@ -1,0 +1,10 @@
+all: main
+
+myprog: main
+	./main
+
+main: main.cpp ArrayStack.cpp Stack.hpp
+	g++ main.cpp ArrayStack.cpp Stack.hpp -o main
+
+c:
+	rm -f main main-debug
