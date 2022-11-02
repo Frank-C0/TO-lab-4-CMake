@@ -4,11 +4,14 @@
 template <typename T>
 class Stack
 {
+    // int data;
 public:
-    virtual void push(T) = 0;
-    virtual void pop() = 0;
-    virtual T top() = 0;
-    virtual bool empty() = 0;
+    // virtual Stack() {}
+    // virtual ~Stack() {}
+    virtual void push(T) ;
+    virtual void pop() ;
+    virtual T top() ;
+    virtual bool empty() ;
 };
 
 #endif
