@@ -1,0 +1,1 @@
+/nix/store/4xs1xyj8728yvh9y5v6ji819kwgfy2fv-gcc-wrapper-10.3.0/bin/g++ CMakeFiles/hello_test.dir/hello_test.cpp.o -o hello_test  lib/libgtest_main.a lib/libgtest.a -lpthread 
