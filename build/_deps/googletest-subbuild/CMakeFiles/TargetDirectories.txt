@@ -1,3 +1,3 @@
-/home/runner/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/rebuild_cache.dir
-/home/runner/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/edit_cache.dir
-/home/runner/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/ALL_BUILD.dir
+D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/ZERO_CHECK.dir
