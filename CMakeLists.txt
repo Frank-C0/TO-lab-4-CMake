@@ -4,6 +4,7 @@
 
 # my_project$ cd build && ctest
 
+
 cmake_minimum_required(VERSION 3.14)
 project(my_project)
 
@@ -23,7 +24,9 @@ enable_testing()
 
 add_executable(
   hello_test
-  hello_test.cpp
+  hello_test.cc
+  ./ArrayStack/ArrayStack.cc
+  ./ArrayStack/Stack.h
 )
 target_link_libraries(
   hello_test

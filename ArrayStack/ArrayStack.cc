@@ -1,7 +1,7 @@
 #include "ArrayStack.h"
 #include <cassert>
-#include <string>
 #include <iostream>
+#include <string>
 using namespace std;
 
 // AXIOMS
@@ -18,6 +18,39 @@ ArrayStack<T>::ArrayStack(int z) : size{z}, data{new T[size]} {
   assert(pointer == data);
   assert(empty() == true); // 5. empty(newstack) = true
 }
+
+template <typename T>
+ArrayStack<T>::ArrayStack(const ArrayStack<T> &s) : size{s.size}, data{new T[size]} {
+  // cout << "Copy constructor called "<<"\n";
+  pointer = data;
+
+  T *iter = s.data;
+  while (iter != s.pointer) {
+    push(*iter);
+    iter++;
+  }
+  assert((pointer - data) == (s.pointer - s.data));
+  assert(size == s.size);
+}
+
+template <typename T>
+bool ArrayStack<T>::operator==(const ArrayStack<T> &s) {
+  if((pointer - data) != (s.pointer - s.data)){
+    return false;
+  }
+  T *iter_this = data;
+  T *iter = s.data;
+  while (iter != s.pointer || iter_this != pointer) {
+    if(*iter_this != *iter){
+      return false;
+    }
+    iter++;
+    iter_this++;
+  }
+
+  return true;
+}
+
 template <typename T>
 int ArrayStack<T>::sizeUsed() {
   return pointer - data;

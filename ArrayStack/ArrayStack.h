@@ -11,13 +11,13 @@ using namespace std;
 template <typename T>
 class ArrayStack : public Stack<T> {
 
-private:
+  private:
   T *pointer;
   void resize();
   int size;
   T *data;
 
-public:
+  public:
   ArrayStack(int);
   ~ArrayStack();
   void push(T);
@@ -26,6 +26,10 @@ public:
   bool empty();
   void print(ostream &);
   int sizeUsed();
+
+  ArrayStack(const ArrayStack &s);
+
+  bool operator==(const ArrayStack &s);
 };
 
 #endif
