@@ -1,3 +1,0 @@
-D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
-D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/ALL_BUILD.dir
-D:/gith/TO-lab-4-CMake/build/_deps/googletest-subbuild/CMakeFiles/ZERO_CHECK.dir
