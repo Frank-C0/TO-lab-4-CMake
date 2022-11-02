@@ -74,7 +74,7 @@ TEST(ListTest, Axioma5){
   EXPECT_TRUE(newList->append(99)->isEmpty() == false);
 }
 // 6. head(new) = error
-TEST(ListTest, Axioma5){
+TEST(ListTest, Axioma6){
   LinkedList<int> list;
   List<int> *newList = &list;
 
@@ -91,7 +91,7 @@ TEST(ListTest, Axioma7){
 }
 
 // 8. tail(new) = error
-TEST(ListTest, Axioma5){
+TEST(ListTest, Axioma8){
   LinkedList<int> list;
   List<int> *newList = &list;
   ASSERT_DEATH(newList->tail(), "Assertion*");
