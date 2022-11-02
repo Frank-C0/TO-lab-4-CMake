@@ -25,8 +25,8 @@ enable_testing()
 add_executable(
   hello_test
   hello_test.cc
-  ./ArrayStack/ArrayStack.cc
-  ./ArrayStack/Stack.h
+  ArrayStack.cc
+  Stack.h
 )
 target_link_libraries(
   hello_test

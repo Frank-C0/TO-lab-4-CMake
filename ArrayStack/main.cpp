@@ -59,8 +59,12 @@ using namespace std;
 // delete stackArray;
 // }
 
+// $ g++ -o main main.cpp ArrayStack.cc Stack.h
+void doAs() { assert(false); }
 int main() {
+  // doAs();
   ArrayStack<int> stackArray(3);
+  stackArray.top();
   stackArray.push(5);
   stackArray.push(6);
   stackArray.print(cout);
@@ -70,15 +74,15 @@ int main() {
   stackArrayCopy.push(63);
   stackArrayCopy.push(73);
   stackArrayCopy.print(cout);
-cout<<"eq: "<< (stackArray == stackArrayCopy)<<'\n';
-  
+  cout << "eq: " << (stackArray == stackArrayCopy) << '\n';
+
   stackArray.push(52);
   stackArray.push(63);
   stackArray.push(73);
   stackArray.print(cout);
 
-  cout<<"eq: "<< (stackArray == stackArrayCopy)<<'\n';
-  
-cout<<"true: "<< true<<'\n';
-cout<<"false: "<< false<<'\n';
+  cout << "eq: " << (stackArray == stackArrayCopy) << '\n';
+
+  cout << "true: " << true << '\n';
+  cout << "false: " << false << '\n';
 }

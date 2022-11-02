@@ -1,5 +1,6 @@
-#include "./ArrayStack/ArrayStack.h"
+#include "ArrayStack.cc"
 #include <gtest/gtest.h>
+#include <cassert>  
 
 // cmake -S . -B build
 // cmake --build build
@@ -21,8 +22,10 @@
 //    5. empty(newstack) = true
 //    6. empty(push(S,I))= false
 
+
+
 //    1. pop(newstack)   = newstack
-TEST(ArrayTest, Axioma1Test) {
+TEST(ArrayTest, Axioma1) {
   ArrayStack<int> stack(4);
   Stack<int> *newstack = &stack;
 
@@ -36,7 +39,7 @@ TEST(ArrayTest, Axioma1Test) {
 }
 
 //    2. pop(push(S,I))  = S
-TEST(ArrayTest, Axioma2TestEmptyCase) {
+TEST(ArrayTest, Axioma2EmptyCase) {
   ArrayStack<int> stack(4);
   Stack<int> *newstack = &stack;
 
@@ -48,8 +51,8 @@ TEST(ArrayTest, Axioma2TestEmptyCase) {
   newstack->pop();
   EXPECT_TRUE(stack == stack_copy);
 }
-//    2. pop(push(S,I))  = S
-TEST(ArrayTest, Axioma2TestNoEmptyCase) {
+   // 2. pop(push(S,I))  = S
+TEST(ArrayTest, Axioma2NoEmptyCase) {
   ArrayStack<int> stack(4);
   Stack<int> *newstack = &stack;
 
@@ -67,11 +70,55 @@ TEST(ArrayTest, Axioma2TestNoEmptyCase) {
   EXPECT_TRUE(stack == stack_copy);
 }
 
-//    3. top(newstack)   = undefined
-// TEST(ArrayTest, Axioma3TestNoEmptyCase){
-//   ASSERT_DEATH({
-//     ArrayStack<int> stack(4);
-//     Stack<int> *newstack = &stack;
-//     newstack.pop();
-//   }, "Error on line .* of Foo()");
-// }
+void doAssert() {
+    assert(true);
+}
+   // 3. top(newstack)   = undefined
+TEST(ArrayTest, Axioma3){
+  ArrayStack<int> stack(4);
+  Stack<int> *newstack = &stack;
+  doAssert();
+  ASSERT_DEATH(newstack->top(), "Assertion `empty()*");
+  
+}
+
+// 4. top(push(S,I))  = I
+TEST(ArrayTest, Axioma4EmptyCase) {
+  ArrayStack<int> stack(4);
+  Stack<int> *newstack = &stack;
+  
+  int val_push = 5;
+  newstack->push(val_push);
+  EXPECT_TRUE(newstack->top() == val_push);
+}
+// 4. top(push(S,I))  = I
+TEST(ArrayTest, Axioma4NoEmptyCase) {
+  ArrayStack<int> stack(4);
+  Stack<int> *newstack = &stack;
+
+  newstack->push(3);
+  newstack->push(5);
+  newstack->push(7);
+  newstack->push(11);
+  
+  int val_push = 5;
+  newstack->push(val_push);
+  EXPECT_TRUE(newstack->top() == val_push);
+}
+
+//    5. empty(newstack) = true
+TEST(ArrayTest, Axioma5) {
+  ArrayStack<int> stack(4);
+  Stack<int> *newstack = &stack;
+
+  EXPECT_TRUE(newstack->empty());
+}
+
+  // 6. empty(push(S,I))= false
+TEST(ArrayTest, Axioma6) {
+  ArrayStack<int> stack(4);
+  Stack<int> *newstack = &stack;
+
+  newstack->push(100);
+  EXPECT_FALSE(newstack->empty());
+}
