@@ -3,17 +3,17 @@
 
 template <typename T>
 class List {
-public:
-  List();                // new :  --> LIST
-  List *append(T e);     // append : LIST x E  --> LIST
-  T head();              // head    : LIST    -/-> ELEMENT (partial)
-  List *tail();          // tail    : LIST    -/-> LIST (partial)
-  int size();            // size    : LIST    --> INT
-  bool isEmpty();        // isEmpty  : LIST   --> BOOL
+  public:
+  // new :  --> LIST
+  virtual List<T> *append(T e) = 0; // append : LIST x E  --> LIST
+  virtual T head() = 0;             // head    : LIST    -/-> ELEMENT (partial)
+  virtual List<T> *tail() = 0;      // tail    : LIST    -/-> LIST (partial) ???
+  // virtual T tail() = 0;      
+  virtual int size() = 0;           // size    : LIST    --> INT
+  virtual bool isEmpty() = 0;       // isEmpty  : LIST   --> BOOL
 };
 
 #endif
-
 
 // new :  --> LIST
 // append : LIST x E  --> LIST

@@ -1,69 +1,130 @@
-#include "List.h"
+#include "linkedList.h"
 
 #include <iostream>
+#include <string>
 
+#include <cassert>
 using namespace std;
 
-List::List() { last = nullptr; }
-bool List::isEmpty() { return this->last == nullptr; }
-List *List::append(int e) {
+// Axioms
+// e1. size(new) == 0
+// e2. size(append(L, E)) > 0
+// e3. size(append(new, E)) == 1
+// e4. empty(new) == True
+// e5. empty(append(L, E)) = False
+// e6. head(new) = error
+// 7. head(append(append(new, E), F)) = E  //primer elemento
+// e8. tail(new) = error
+
+template <typename T>
+LinkedList<T>::LinkedList() {
+  last = nullptr;
+  cout << "nullptr: " << (last != nullptr) << true << '\n';
+  assert(isEmpty() == true); // 4. empty(new) == True
+  assert(size() == 0);       // 1. size(new) == 0
+}
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList &s) {
+  last = nullptr;
+  if (!(s.last == nullptr)) {
+    Node<T> *iter = s.last->next;
+    while (true) {
+      append(iter->data);
+      iter = iter->next;
+      if (iter == s.last) {
+        append(iter->data);
+        break;
+      }
+    }
+  }
+}
+
+template <typename T>
+bool LinkedList<T>::isEmpty() { return this->last == nullptr; }
+
+template <typename T>
+void LinkedList<T>::insertNextNode(Node<T> *node, T value) {
+}
+
+template <typename T>
+LinkedList<T> *LinkedList<T>::append(int e) {
   if (isEmpty()) {
-    // cout << "intent insert first " << e << '\n';
-    last = new Node;
+    last = new Node<T>;
     last->data = e;
     last->next = last;
-    // cout << "insert first " << e << '\n';
     return this;
   }
-  // cout << "intent insert " << e << '\n';
-  Node *n = new Node;
+  Node<T> *n = new Node<T>;
   n->data = e;
   n->next = last->next;
   last->next = n;
   last = n;
-  // cout << "insert " << e << '\n';
+
+  assert(isEmpty() == false);                    // 5. empty(append(L, E)) = False
+  assert(!(isEmpty() == true) && (size() != 1)); // 3. size(append(new, E)) == 1  // solo si  empty && size!=1,  falla
+  assert(size() > 0);                            // 2. size(append(L, E)) > 0
   return this;
 }
 
-List *List::append(int e, int pos) {
-  int n = size();
-  if (pos == 0) {
-    if (isEmpty()) {
-      // cout << "intent insert first " << e << '\n';
-      last = new Node;
-      last->data = e;
-      last->next = last;
-      // cout << "insert first " << e << '\n';
-      return this;
-    }
-    // cout << "intent insert " << e << '\n';
-    Node *n = new Node;
-    n->data = e;
-    n->next = last->next;
-    last->next = n;
-    last = n;
-    // cout << "insert " << e << '\n';
+template <typename T>
+LinkedList<T> *LinkedList<T>::append(int e, int pos) {
+  if (isEmpty()) {
+    return append(e);
   }
-	Node *iter = last;
-	for(int i = 0; i<n && i<pos-1;i++){
-		iter = iter->next;
-		
-	}
-	Node *newNode = new Node;
-	newNode->data=e;
-	newNode->next=iter->next;
-	iter->next=newNode;
-
+  Node<T> *iter = last;
+  for (int i = 0; i < pos; i++) {
+    iter = iter->next;
+  }
+  Node<T> *newNode = new Node<T>;
+  newNode->data = e;
+  newNode->next = iter->next;
+  iter->next = newNode;
   return this;
 }
 
-int List::head() { return last->next->data; }
-int List::size() {
+template <typename T>
+T LinkedList<T>::head() {
+  assert(true);              // 7. head(append(append(new, E), F))=E // se necesitaria una variable para recordar que elemento se añadio primero
+  assert(isEmpty() == false); // 6. head(new) = error // no definido para vacio
+  return last->next->data;
+}
+
+// template <typename T>
+// T LinkedList<T>::tail() {
+//   assert(isEmpty() == true); // 8. tail(new) = error // no definido para vacio
+//   Node<T> *iter = last;
+//   while (iter->next != nullptr) {
+//     iter = iter->next;
+//   }
+//   return iter->data;
+// }
+template <typename T>
+LinkedList<T> *LinkedList<T>::tail() {
+  assert(isEmpty() == false);   // 8. tail(new) = error // no definido para vacio
+
+  LinkedList<T> *newList = new LinkedList<T>;
+
+  Node<T> *iter = last->next->next;
+  while (true) {
+    newList->append(iter->data);
+    iter = iter->next;
+    if (iter == last) {
+      newList->append(iter->data);
+      break;
+    }
+  }
+
+  return newList;
+}
+
+template <typename T>
+int LinkedList<T>::size() {
   if (isEmpty()) {
     return 0;
   }
   int c = 0;
-  Node *iter = last;
+  Node<T> *iter = last;
   while (iter) {
     iter = iter->next;
     if (iter == last)
@@ -72,17 +133,24 @@ int List::size() {
   }
   return c;
 }
-void List::print(ostream &o) {
-  if (isEmpty()) {
-    o << "Vacio";
-    return;
+
+template <typename T>
+void LinkedList<T>::print(std::ostream &) {
+  cout << "List (" << size() << "): ";
+  if (!isEmpty()) {
+    Node<T> *iter = last->next;
+    while (true) {
+      cout << iter->data << ", ";
+      iter = iter->next;
+      if (iter == last) {
+        cout << iter->data << ", ";
+        break;
+      }
+    }
   }
-  Node *iter = last;
-  while (iter) {
-    o << iter->data << ", ";
-    iter = iter->next;
-    if (iter == last)
-      iter = nullptr;
-  }
-  o << '\n';
+  cout << "end" << '\n';
+}
+
+template <typename T>
+void LinkedList<T>::remove(int i) {
 }
